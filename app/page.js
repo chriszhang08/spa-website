@@ -1,95 +1,62 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
+import Navbar from "../components/navbar/navbar";
+import {
+  ChakraProvider,
+  Heading,
+  Flex,
+  extendTheme,
+  Box,
+  Link,
+  Image,
+} from "@chakra-ui/react";
+import styles from "./page.module.css";
+
+// 2. Call `extendTheme` and pass your custom values
+const theme = extendTheme({
+  colors: {
+    spa: {
+      green: "#3b672b",
+      // ...
+      grey: "#585b54",
+    },
+  },
+});
 
 export default function Home() {
+  const bgImage = {
+    background: "url('/spaobjects.jpg') center/cover no-repeat",
+  };
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    <ChakraProvider theme={theme}>
+      <Flex sx={bgImage} direction="column" justifyContent="space-between">
+        <Navbar flexGrow={0} flexShrink={1} flexBasis="auto" />
+        <Flex height="80vh" direction="column" justify="center">
+          <Flex height="30%" direction="column">
+            <Heading
+              as="h1"
+              size="2xl"
+              color="white"
+              textAlign="center"
+              p="5px"
+            >
+              Relaxing, Rejuvenating, Remedies
+            </Heading>
+            <Heading as="h3" size="md" color="white" textAlign="center" p="5px">
+              Bring serenity and peace directly to your door
+            </Heading>
+          </Flex>
+          <Flex direction="row" justify="center">
+            <Link href="./book" className={styles.card}>
+              <h2>
+                Book Now <span>-&gt;</span>
+              </h2>
+            </Link>
+            <Link href="/api/python">
+              <code className="font-mono font-bold">api/index.py</code>
+            </Link>
+          </Flex>
+        </Flex>
+      </Flex>
+    </ChakraProvider>
+  );
 }
