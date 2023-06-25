@@ -30,6 +30,8 @@ function FormPage() {
   const [number, setNumber] = useState("");
   const [photo, setPhoto] = useState(null);
 
+  const objectWithData = { name: name, email: email, number: number };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Perform any desired actions with the form data and photo
@@ -37,6 +39,14 @@ function FormPage() {
     console.log("Email:", email);
     console.log("Photo:", photo);
     console.log("Number: ", number);
+    // send the data to the backend
+    fetch("/api/booknow", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(objectWithData),
+    });
     // Reset form fields
     setName("");
     setEmail("");
