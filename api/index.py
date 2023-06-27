@@ -1,7 +1,11 @@
+from email.mime.image import MIMEImage
+
 from flask import Flask, request, jsonify, json
 import smtplib, ssl
 from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
+from email import encoders
 
 app = Flask(__name__)
 
@@ -13,14 +17,23 @@ def hello_world():
 @app.route("/api/booknow", methods=['POST'])
 def customer_info():
     name = request.form.get('name')
-    email = request.json['email']
-    number = request.json['number']
+    email = request.form.get('email')
+    number = request.form.get('number')
+    photo = request.files['photoId']
+    if photo.filename == '':
+        return 'No file selected', 400
+
+    # Save the file or perform any desired operations
+    filename = '/Users/chris/Documents/CS/massage-com/public/photoid.jpg'
+    photo.save(filename)
+    attachment = open(filename, 'rb')
+
     # Configure email settings
-    sender_email = 'cz20007016@gmail.com'
-    sender_password = 'Epic Man 1'
-    receiver_email = 'czhang2003@gmail.com'
+    sender_email = 'czhang2003@gmail.com'
+    sender_password = 'tzvsyybnybntvdnu'
+    receiver_email = email
     subject = 'Hello from Flask API'
-    message = number
+    message = str(number) + str(name)
 
     # Create a multipart message
     msg = MIMEMultipart()
@@ -31,30 +44,25 @@ def customer_info():
     # Attach the message to the email
     msg.attach(MIMEText(message, 'plain'))
 
-    print(msg)
+    msgImage = MIMEImage(attachment.read())
+    attachment.close()
+    msgImage.add_header('Content-ID', '<image1>')
+    msg.attach(msgImage)
 
     port = 465  # For SSL
 
     # Create a secure SSL context
     context = ssl.create_default_context()
 
-    with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
-        server.login("cz20007016@gmail.com", sender_password)
-        # TODO: Send email here
-        server.quit()
+    try:
+        with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
+            server.login(sender_email, sender_password)
+            server.send_message(msg)
+            server.quit()
+            return jsonify({'message': 'Email sent successfully'})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
-    return jsonify({'message': 'Email sent successfully'})
-
-    # try:
-    #     # Send the email using SMTP server
-    #     with smtplib.SMTP('smtp.gmail.com', 587) as server:
-    #         server.starttls()
-    #         server.login(sender_email, sender_password)
-    #         server.send_message(msg)
-    #         server.quit()
-    #     return jsonify({'message': 'Email sent successfully'})
-    # except Exception as e:
-    #     return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run()

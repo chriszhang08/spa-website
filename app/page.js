@@ -6,10 +6,19 @@ import {
   Flex,
   extendTheme,
   Box,
-  Link,
-  Image,
+  Text,
+  Grid,
+  GridItem,
+  Stat,
+  StatLabel,
+  StatNumber,
+  StatHelpText,
 } from "@chakra-ui/react";
+import { Link } from "react-scroll";
 import styles from "./page.module.css";
+
+// TODO create a page for customer testimonies and reviews
+// maybe add an API to the yelp page?
 
 // 2. Call `extendTheme` and pass your custom values
 const theme = extendTheme({
@@ -46,16 +55,83 @@ export default function Home() {
             </Heading>
           </Flex>
           <Flex direction="row" justify="center">
-            <Link href="./book" className={styles.card}>
-              <h2>
-                Book Now <span>-&gt;</span>
-              </h2>
-            </Link>
-            <Link href="/api/python">
-              <code className="font-mono font-bold">api/index.py</code>
-            </Link>
+            <Box className={styles.card} cursor="pointer">
+              <Link
+                activeClass="active"
+                to="services"
+                spy={true}
+                smooth={true}
+                duration={1000}
+              >
+                <h2>
+                  See Our Services <span>-&gt;</span>
+                </h2>
+              </Link>
+            </Box>
           </Flex>
         </Flex>
+        <Grid
+          templateColumns="repeat(3, 1fr)"
+          gap={4}
+          paddingX={4}
+          paddingBottom={4}
+          id="services"
+          sx={{ scrollBehavior: "smooth" }}
+        >
+          <GridItem w="100%" h="100vh" bg="blue.500">
+            <Heading
+              as="h2"
+              size="2xl"
+              color="white"
+              textAlign="center"
+              p="5px"
+            >
+              Spot Massage
+            </Heading>
+            <Stat textAlign="center">
+              <StatNumber>$75.00</StatNumber>
+              <StatHelpText>1 hour</StatHelpText>
+            </Stat>
+            <Text>
+              Get a massage on your spot treatment. Everyone loves it, see these
+              reviews.
+            </Text>
+          </GridItem>
+          <GridItem w="100%" h="100vh" bg="blue.400">
+            <Heading
+              as="h2"
+              size="2xl"
+              color="white"
+              textAlign="center"
+              p="5px"
+            >
+              Thigh Massage
+            </Heading>
+            <Stat textAlign="center">
+              <StatNumber>$120.00</StatNumber>
+              <StatHelpText>2 hour</StatHelpText>
+            </Stat>
+          </GridItem>
+          <GridItem w="100%" h="100vh" bg="blue.300">
+            <Heading
+              as="h2"
+              size="2xl"
+              color="white"
+              textAlign="center"
+              p="5px"
+            >
+              Swedish Massage
+            </Heading>
+            <Stat textAlign="center">
+              <StatNumber>$65.00</StatNumber>
+              <StatHelpText>30 minutes</StatHelpText>
+            </Stat>
+            <Text>
+              Because you know the Swedes knew how to get around the body. Book
+              a Swedish massage today.
+            </Text>
+          </GridItem>
+        </Grid>
       </Flex>
     </ChakraProvider>
   );

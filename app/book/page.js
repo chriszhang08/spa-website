@@ -24,13 +24,13 @@ const theme = extendTheme({
   },
 });
 
+// TODO how will the user be able to see when the massuese is available? What if the massuese isn't available
+
 function FormPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
   const [photo, setPhoto] = useState(null);
-
-  const objectWithData = { name: name, email: email, number: number };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,18 +39,23 @@ function FormPage() {
     console.log("Email:", email);
     console.log("Photo:", photo);
     console.log("Number: ", number);
+
+    // Create a new FormData object
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("number", number);
+    formData.append("email", email);
+    // Append the JPG file
+    formData.append("photoId", photo);
+
     // send the data to the backend
     fetch("/api/booknow", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(objectWithData),
+      body: formData,
     });
     // Reset form fields
     setName("");
     setEmail("");
-    setPhoto(null);
     setNumber("");
   };
 
