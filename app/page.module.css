@@ -53,11 +53,25 @@
   background: rgba(var(--card-rgb), 1);
   border: 1px solid rgba(var(--card-border-rgb), 0);
   transition: background 200ms, border 200ms;
-  width: 20%;
+}
+
+.banner span {
+  display: inline-block;
+  font-size: 36px;
+  transition: transform 200ms;
+}
+
+.verified a{
+  text-decoration:none;
+}
+
+.verified a:hover {
+  text-decoration:underline;
 }
 
 .card span {
   display: inline-block;
+  font-size: 20px;
   transition: transform 200ms;
 }
 
@@ -106,9 +120,9 @@
 }
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
-  .card:hover {
-    background: rgba(var(--card-rgb), 0.5);
-    border: 1px solid rgba(var(--card-border-rgb), 0.15);
+
+  .banner:hover span {
+    transform: translateY(4px);
   }
 
   .card:hover span {
@@ -117,7 +131,7 @@
 }
 
 @media (prefers-reduced-motion) {
-  .card:hover span {
+  .banner:hover span {
     transform: none;
   }
 }

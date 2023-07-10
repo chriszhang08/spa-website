@@ -29,56 +29,42 @@ function BusinessDetailsPage() {
       <Flex
         bgGradient="linear(to-b, spa.green, spa.grey)"
         direction="column"
-        justifyContent="space-between"
+        height="100vh"
       >
         <Navbar flexGrow={0} flexShrink={1} flexBasis="auto" />
         <Box maxW="lg" mx="auto" mt={8} p={4}>
           <Heading as="h1" mb={4}>
-            Business Name
+            First name Last name
           </Heading>
 
-          <Box display="flex" alignItems="center" mb={4}>
-            <Image
-              src="/business-logo.png"
-              alt="Business Logo"
-              boxSize={100}
-              mr={4}
-            />
+          <Flex alignItems="center" mb={4}>
             <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-              sit amet mauris et est tincidunt cursus ac at mi. Fusce commodo
-              dui nec justo commodo, at ultrices mi ultricies.
+              Lakeshore Massages was started by me in 2023 after I moved to
+              Chicago. I've been all over the world learning massage techniques
+              from Asia, Africa and Europe. I choose to operate my own practice
+              because I enjoy my job more when I get to make a personal
+              connection with my clients. That is also why I choose to bring my
+              services directly to you, as that creates a more personal
+              experience.
             </Text>
-          </Box>
+          </Flex>
 
           <Heading as="h2" size="lg" mb={2}>
             Background
           </Heading>
           <Text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac
-            felis sed nisi ultricies commodo a vel sem. Phasellus id cursus
-            ligula. Fusce vestibulum nisl vel risus varius lacinia. Maecenas
-            malesuada dui at urna aliquet, id dapibus metus bibendum.
-          </Text>
-
-          <Heading as="h2" size="lg" mb={2}>
-            History
-          </Heading>
-          <Text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac
-            felis sed nisi ultricies commodo a vel sem. Phasellus id cursus
-            ligula. Fusce vestibulum nisl vel risus varius lacinia. Maecenas
-            malesuada dui at urna aliquet, id dapibus metus bibendum.
+            I was born in City in Ethiopia, where my mother taught me how to
+            massage for local traditions. Once I was 18, I started to travel the
+            world, going to Thailand, Sweden and China to improve my massage
+            practice there.
           </Text>
 
           <Heading as="h2" size="lg" mb={2}>
             Credibility
           </Heading>
           <Text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac
-            felis sed nisi ultricies commodo a vel sem. Phasellus id cursus
-            ligula. Fusce vestibulum nisl vel risus varius lacinia. Maecenas
-            malesuada dui at urna aliquet, id dapibus metus bibendum.
+            I am a licensed massage Therapist in State of Illinois (license
+            #227.015501). I own and operate Lakeshore Massages by myself.
           </Text>
         </Box>
       </Flex>

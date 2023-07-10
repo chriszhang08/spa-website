@@ -19,6 +19,7 @@ def customer_info():
     name = request.form.get('name')
     email = request.form.get('email')
     number = request.form.get('number')
+    service = request.form.get('service')
     photo = request.files['photoId']
     if photo.filename == '':
         return 'No file selected', 400
@@ -33,7 +34,7 @@ def customer_info():
     sender_password = 'tzvsyybnybntvdnu'
     receiver_email = email
     subject = 'Hello from Flask API'
-    message = str(number) + str(name)
+    message = str(number) + str(name) + str(service)
 
     # Create a multipart message
     msg = MIMEMultipart()
@@ -59,7 +60,7 @@ def customer_info():
             server.login(sender_email, sender_password)
             server.send_message(msg)
             server.quit()
-            return jsonify({'message': 'Email sent successfully'})
+            return jsonify({'message': 'Email sent successfully'}, 200)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 

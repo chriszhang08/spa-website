@@ -50,7 +50,7 @@ const MenuLinks = ({ isOpen, children, isLast, ...rest }) => {
       >
         <MenuItem to="/">Home</MenuItem>
         <MenuItem to="/book">Book Now</MenuItem>
-        <MenuItem to="/bio">About Us</MenuItem>
+        <MenuItem to="/bio">Why Us</MenuItem>
       </Stack>
     </Box>
   );
@@ -74,7 +74,7 @@ const Navbar = (props) => {
       w="100%"
       height="20vh"
     >
-      <Text color="white">Massage Co</Text>
+      <Text color="white">Lakeshore Massages</Text>
       <MenuLinks isOpen={isOpen} />
       <MenuToggle toggle={handleToggle} isOpen={isOpen} />
     </Flex>
