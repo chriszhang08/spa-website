@@ -64,7 +64,9 @@ function BusinessDetailsPage() {
           </Heading>
           <Text>
             I am a licensed massage Therapist in State of Illinois (license
-            #227.015501). I own and operate Lakeshore Massages by myself.
+            #227.015501). I own and operate Lakeshore Massages by myself. Give
+            me a call :) TODO insert number here I'd be happy to explain myself
+            better over the phone.
           </Text>
         </Box>
       </Flex>

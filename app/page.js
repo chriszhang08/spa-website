@@ -19,6 +19,7 @@ import * as Scroll from "react-scroll";
 import styles from "./page.module.css";
 import ReviewSnippet from "@/components/reviewSnippet";
 import ActiveButton from "@/components/activeButton";
+import { useRouter } from "next/navigation";
 import "@fontsource/calligraffitti/400.css";
 
 var SmoothLink = Scroll.Link;
@@ -56,7 +57,7 @@ export default function Home() {
     {
       name: "John Smith",
       rating: 5,
-      text: "Excellent service! The massage therapists were professional and skilled. I felt relaxed and rejuvenated after the session.",
+      text: "*Masseuse* was excellent! I picked the 30 minute Swedish massage and I wish I picked the one hour version. I felt so relaxed and rejuvenated after the session.",
       verified: true,
       externalLink:
         "https://stackoverflow.com/questions/44860766/how-to-create-underline-effect-on-hovered-links-in-css",
@@ -72,20 +73,26 @@ export default function Home() {
     {
       name: "Michael Davis",
       rating: 5,
-      text: "Outstanding experience! The therapist was attentive to my needs and focused on the areas that required the most attention. I highly recommend their mobile massage service.",
+      text: "Outstanding service! I needed a massage after my intense PT sessions, and *Massuese* was sp attentive to my needs and careful around the delicate areas. I highly recommend their mobile massage service.",
       verified: true,
       externalLink:
         "https://stackoverflow.com/questions/44860766/how-to-create-underline-effect-on-hovered-links-in-css",
     },
     {
       name: "Sarah Thompson",
-      rating: 4,
-      text: "The mobile massage was a wonderful treat. It was incredibly convenient to have the therapist come to my home. The massage was relaxing, and the therapist was skilled and professional.",
+      rating: 5,
+      text: "I really loved how convenient the service was. It was incredibly convenient to have the therapist come direclty to my hotel. The massage was relaxing, and the therapist was skilled and professional.",
       verified: true,
       externalLink:
         "https://stackoverflow.com/questions/44860766/how-to-create-underline-effect-on-hovered-links-in-css",
     },
   ];
+
+  const router = useRouter();
+  const handleClick = (e, service) => {
+    e.preventDefault();
+    router.push(`/book?service=${service}`);
+  };
 
   return (
     <ChakraProvider theme={theme}>
@@ -110,16 +117,22 @@ export default function Home() {
                 p="20px"
                 templateAreas={`
                 "larrow header rarrow"
-                "larrow main rarrow"`}
-                templateColumns="1fr 8fr 1fr"
-                templateRows="3fr 1fr"
+                "larrow main rarrow"
+                `}
+                templateColumns={[
+                  "0fr 1fr 0fr",
+                  "1fr 8fr 1fr",
+                  "1fr 8fr 1fr",
+                  "1fr 8fr 1fr",
+                ]}
+                templateRows={"3fr 1fr"}
                 bg="lavendar.400"
                 m="30px"
                 className={styles.banner}
                 cursor="pointer"
               >
                 <GridItem
-                  area={"larrow"}
+                  area={["larrow"]}
                   color="white"
                   display="flex"
                   alignItems="center"
@@ -129,7 +142,7 @@ export default function Home() {
                 </GridItem>
                 <GridItem area={"header"}>
                   <Heading as="h1" size="2xl" color="white" textAlign="center">
-                    Relax, Rejuvenate, Restore
+                    Relax , Rejuvenate , Restore
                   </Heading>
                 </GridItem>
                 <GridItem area={"main"}>
@@ -152,10 +165,14 @@ export default function Home() {
         </Flex>
         <Box bgGradient="linear(to-b, spa.turquoise, spa.dark_turquoise)">
           <Grid
-            templateColumns="repeat(3, 1fr)"
-            gap={4}
-            paddingX={4}
-            paddingY={4}
+            templateColumns={[
+              "repeat(1, 1fr)",
+              "repeat(2, 1fr)",
+              "repeat(3, 1fr)",
+            ]}
+            gap={[4, 6, 8]}
+            paddingX={[2, 4, 8]}
+            paddingY={[2, 4, 8]}
             id="services"
             sx={{ scrollBehavior: "smooth" }}
           >
@@ -164,8 +181,7 @@ export default function Home() {
                 p="10px"
                 flexDirection="column"
                 cursor="pointer"
-                as="a"
-                href="/book"
+                onClick={(e) => handleClick(e, "swedish")}
               >
                 <Heading
                   as="h2"
@@ -189,51 +205,15 @@ export default function Home() {
                   friction.
                 </Text>
                 <ReviewSnippet review={reviews[0]} />
-                <ReviewSnippet review={reviews[1]} />
-                <ActiveButton />
+                <ActiveButton service="swedish" />
               </Flex>
             </GridItem>
-            <GridItem w="100%" h="100vh" bg="lavendar.300">
+            <GridItem w="100%" bg="lavendar.300">
               <Flex
                 p="10px"
                 flexDirection="column"
                 cursor="pointer"
-                as="a"
-                href="/book"
-              >
-                <Heading
-                  as="h2"
-                  size="2xl"
-                  color="white"
-                  textAlign="center"
-                  p="5px"
-                >
-                  Thai Massage
-                </Heading>
-                <Stat textAlign="center">
-                  <StatNumber>$120.00</StatNumber>
-                  <StatHelpText>1 hour</StatHelpText>
-                </Stat>
-                <Text>
-                  Thai massage is a form of therapeutic touch that differs in
-                  many ways from traditional massage. Instead of a massage
-                  table, you lie on a mat on the floor while the provider
-                  manipulates your body in certain ways to stimulate organs and
-                  improve flexibility. Thai massage is part of traditional Thai
-                  medicine, and like most eastern treatments, it works with the
-                  body's energetic pathways.
-                </Text>
-                <ReviewSnippet review={reviews[2]} />
-                <ActiveButton />
-              </Flex>
-            </GridItem>
-            <GridItem w="100%" h="100vh" bg="lavendar.100">
-              <Flex
-                p="10px"
-                flexDirection="column"
-                cursor="pointer"
-                as="a"
-                href="/book"
+                onClick={(e) => handleClick(e, "hotstone")}
               >
                 <Heading
                   as="h2"
@@ -259,7 +239,40 @@ export default function Home() {
                   that are being worked on.
                 </Text>
                 <ReviewSnippet review={reviews[3]} />
-                <ActiveButton />
+                <ActiveButton service="hotstone" />
+              </Flex>
+            </GridItem>
+            <GridItem w="100%" bg="lavendar.100">
+              <Flex
+                p="10px"
+                flexDirection="column"
+                cursor="pointer"
+                onClick={(e) => handleClick(e, "thai")}
+              >
+                <Heading
+                  as="h2"
+                  size="2xl"
+                  color="white"
+                  textAlign="center"
+                  p="5px"
+                >
+                  Thai Massage
+                </Heading>
+                <Stat textAlign="center">
+                  <StatNumber>$120.00</StatNumber>
+                  <StatHelpText>1 hour</StatHelpText>
+                </Stat>
+                <Text>
+                  Thai massage is a form of therapeutic touch that differs in
+                  many ways from traditional massage. Instead of a massage
+                  table, you lie on a mat on the floor while the provider
+                  manipulates your body in certain ways to stimulate organs and
+                  improve flexibility. It is a part of traditional Thai
+                  medicine, and like most eastern treatments, it works with the
+                  body's energetic pathways.
+                </Text>
+                <ReviewSnippet review={reviews[2]} />
+                <ActiveButton service="thai" />
               </Flex>
             </GridItem>
           </Grid>

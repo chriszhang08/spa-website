@@ -2,13 +2,12 @@ import { useRouter } from "next/navigation";
 import { Box } from "@chakra-ui/react";
 import styles from "../app/page.module.css";
 
-function ActiveButton({ children, href }) {
+function ActiveButton({ service }) {
   const router = useRouter();
 
   const handleClick = (e) => {
     e.preventDefault();
-    const selectedOption = "Swedish";
-    router.push("/book?selectedOption=Swedish");
+    router.push(`/book?service=${service}`);
   };
 
   return (

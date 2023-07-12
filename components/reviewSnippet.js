@@ -6,42 +6,32 @@ import styles from "../app/page.module.css";
 const ReviewSnippet = ({ review }) => {
   const { name, rating, text, verified, externalLink } = review;
   return (
-    <a href={externalLink} target="_blank" rel="noopener noreferrer">
-      <Box
-        p={4}
-        borderWidth="1px"
-        borderRadius="md"
-        boxShadow="md"
-        marginY="5%"
-      >
-        <Flex alignItems="center" mb={2}>
-          <Text fontWeight="bold" fontSize="lg" mr={2}>
-            {name}
-          </Text>
-          <Flex
-            alignItems="center"
-            color="green.500"
-            className={styles.verified}
+    <Box p={4} borderWidth="1px" borderRadius="md" boxShadow="md" marginY="5%">
+      <Flex alignItems="center" mb={2}>
+        <Text fontWeight="bold" fontSize="lg" mr={2}>
+          {name}
+        </Text>
+        <Flex alignItems="center" color="green.500" className={styles.verified}>
+          <Icon as={CheckCircleIcon} boxSize={4} mr={1} />
+          <a
+            fontSize="sm"
+            href={externalLink}
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <Icon as={CheckCircleIcon} boxSize={4} mr={1} />
-            <Text fontSize="sm" as="a">
-              Verified Review
-            </Text>
-          </Flex>
+            Verified Review
+          </a>
         </Flex>
-        <Box d="flex" alignItems="center" mb={2}>
-          {Array(5)
-            .fill("")
-            .map((_, i) => (
-              <StarIcon
-                key={i}
-                color={i < rating ? "yellow.500" : "gray.300"}
-              />
-            ))}
-        </Box>
-        <Text>{text}</Text>
+      </Flex>
+      <Box d="flex" alignItems="center" mb={2}>
+        {Array(5)
+          .fill("")
+          .map((_, i) => (
+            <StarIcon key={i} color={i < rating ? "yellow.500" : "gray.300"} />
+          ))}
       </Box>
-    </a>
+      <Text>{text}</Text>
+    </Box>
   );
 };
 
