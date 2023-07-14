@@ -15,7 +15,10 @@ import {
   Text,
   Textarea,
 } from "@chakra-ui/react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import Navbar from "../../components/navbar/navbar";
+import Footer from "@/components/footer/footer";
 
 // 2. Call `extendTheme` and pass your custom values
 const theme = extendTheme({
@@ -38,13 +41,25 @@ function FormPage() {
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
   const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [zipcode, setZipcode] = useState("");
   const [specialRequests, setSpecialRequests] = useState("");
   const [photo, setPhoto] = useState(null);
   const [selectedOption, setSelectedOption] = useState("");
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
 
   useEffect(() => {
     setSelectedOption(service);
   }, [service]);
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+  const handleTimeChange = (time) => {
+    setSelectedTime(time);
+  };
 
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
@@ -114,26 +129,9 @@ function FormPage() {
             direction={["column", "row"]}
             justifyContent="space-between"
             onSubmit={handleSubmit}
+            color="white"
           >
             <VStack spacing={4} w={["100%", "45%"]}>
-              <FormControl isRequired>
-                <FormLabel htmlFor="Service">Service</FormLabel>
-                <Select
-                  variant="filled"
-                  placeholder="Select option"
-                  required
-                  bg="gray.100"
-                  _hover={{ bg: "gray.200" }}
-                  _focus={{ bg: "white" }}
-                  borderRadius="md"
-                  value={selectedOption}
-                  onChange={handleSelectChange}
-                >
-                  <option value="swedish">Swedish Massage</option>
-                  <option value="hotstone">Hot Stone Massage</option>
-                  <option value="thai">Thai Massage</option>
-                </Select>
-              </FormControl>
               <FormControl isRequired>
                 <FormLabel htmlFor="name">Name</FormLabel>
                 <Input
@@ -143,6 +141,7 @@ function FormPage() {
                   onChange={(e) => setName(e.target.value)}
                   required
                   bg="gray.100"
+                  color="black"
                   _hover={{ bg: "gray.200" }}
                   _focus={{ bg: "white" }}
                   borderRadius="md"
@@ -155,8 +154,8 @@ function FormPage() {
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  required
                   bg="gray.100"
+                  color="black"
                   _hover={{ bg: "gray.200" }}
                   _focus={{ bg: "white" }}
                   borderRadius="md"
@@ -171,13 +170,12 @@ function FormPage() {
                   onChange={(e) => setNumber(e.target.value)}
                   required
                   bg="gray.100"
+                  color="black"
                   _hover={{ bg: "gray.200" }}
                   _focus={{ bg: "white" }}
                   borderRadius="md"
                 />
               </FormControl>
-            </VStack>
-            <VStack spacing={4} w={["100%", "45%"]}>
               <FormControl isRequired>
                 <FormLabel htmlFor="address">Address</FormLabel>
                 <Input
@@ -187,10 +185,123 @@ function FormPage() {
                   onChange={(e) => setAddress(e.target.value)}
                   required
                   bg="gray.100"
+                  color="black"
                   _hover={{ bg: "gray.200" }}
                   _focus={{ bg: "white" }}
                   borderRadius="md"
                 />
+              </FormControl>
+              <FormControl isRequired>
+                <FormLabel htmlFor="city">City</FormLabel>
+                <Input
+                  type="text"
+                  id="city"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  required
+                  bg="gray.100"
+                  color="black"
+                  _hover={{ bg: "gray.200" }}
+                  _focus={{ bg: "white" }}
+                  borderRadius="md"
+                />
+              </FormControl>
+              <Flex>
+                <FormControl isRequired>
+                  <FormLabel htmlFor="state">State</FormLabel>
+                  <Input
+                    type="text"
+                    id="state"
+                    value={state}
+                    onChange={(e) => setState(e.target.value)}
+                    required
+                    bg="gray.100"
+                    color="black"
+                    _hover={{ bg: "gray.200" }}
+                    _focus={{ bg: "white" }}
+                    borderRadius="md"
+                  />
+                </FormControl>
+                <FormControl isRequired>
+                  <FormLabel htmlFor="zipcode">Zip Code</FormLabel>
+                  <Input
+                    type="text"
+                    id="zipcode"
+                    value={zipcode}
+                    onChange={(e) => setZipcode(e.target.value)}
+                    required
+                    bg="gray.100"
+                    color="black"
+                    _hover={{ bg: "gray.200" }}
+                    _focus={{ bg: "white" }}
+                    borderRadius="md"
+                  />
+                </FormControl>
+              </Flex>
+            </VStack>
+            <VStack spacing={4} w={["100%", "45%"]}>
+              <FormControl isRequired>
+                <FormLabel htmlFor="Service">Service</FormLabel>
+                <Select
+                  variant="filled"
+                  placeholder="Select option"
+                  required
+                  bg="gray.100"
+                  color="black"
+                  _hover={{ bg: "gray.200" }}
+                  _focus={{ bg: "white" }}
+                  borderRadius="md"
+                  value={selectedOption}
+                  onChange={handleSelectChange}
+                >
+                  <option value="swedish">Swedish Massage</option>
+                  <option value="hotstone">Hot Stone Massage</option>
+                  <option value="thai">Thai Massage</option>
+                </Select>
+              </FormControl>
+              <FormControl isRequired>
+                <FormLabel htmlFor="date">
+                  Date of Service (Please book at least 4 hours in advance)
+                </FormLabel>
+                <Flex direction="row" justify="space-between">
+                  <DatePicker
+                    id="date"
+                    selected={selectedDate}
+                    onChange={handleDateChange}
+                    dateFormat="yyyy-MM-dd"
+                    required
+                    color="black"
+                    customInput={
+                      <Input
+                        bg="gray.100"
+                        _hover={{ bg: "gray.200" }}
+                        _focus={{ bg: "white" }}
+                        color="black"
+                        borderRadius="md"
+                      />
+                    }
+                  />
+                  <DatePicker
+                    id="time"
+                    selected={selectedTime}
+                    onChange={handleTimeChange}
+                    showTimeSelect
+                    showTimeSelectOnly
+                    timeIntervals={15}
+                    timeCaption="Time"
+                    dateFormat="h:mm aa"
+                    required
+                    customInput={
+                      <Input
+                        bg="gray.100"
+                        _hover={{ bg: "gray.200" }}
+                        _focus={{ bg: "white" }}
+                        color="black"
+                        borderRadius="md"
+                      />
+                    }
+                  />
+                </Flex>
               </FormControl>
               <FormControl isRequired>
                 <FormLabel htmlFor="photo">Photo ID</FormLabel>
@@ -201,6 +312,7 @@ function FormPage() {
                   onChange={handlePhotoChange}
                   required
                   bg="gray.100"
+                  color="black"
                   _hover={{ bg: "gray.200" }}
                   _focus={{ bg: "white" }}
                   borderRadius="md"
@@ -215,6 +327,7 @@ function FormPage() {
                   value={specialRequests}
                   onChange={(e) => setSpecialRequests(e.target.value)}
                   bg="gray.100"
+                  color="black"
                   _hover={{ bg: "gray.200" }}
                   _focus={{ bg: "white" }}
                   borderRadius="md"
@@ -234,6 +347,7 @@ function FormPage() {
             </VStack>
           </Flex>
         </Flex>
+        <Footer></Footer>
       </Flex>
     </ChakraProvider>
   );
