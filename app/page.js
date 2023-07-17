@@ -21,6 +21,7 @@ import ReviewSnippet from "@/components/reviewSnippet";
 import ActiveButton from "@/components/activeButton";
 import { useRouter } from "next/navigation";
 import "@fontsource/calligraffitti/400.css";
+import Footer from "@/components/footer/footer";
 
 var SmoothLink = Scroll.Link;
 
@@ -276,6 +277,7 @@ export default function Home() {
               </Flex>
             </GridItem>
           </Grid>
+          <Footer />
         </Box>
       </Flex>
     </ChakraProvider>

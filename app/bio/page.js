@@ -9,6 +9,7 @@ import {
   extendTheme,
 } from "@chakra-ui/react";
 import Navbar from "../../components/navbar/navbar";
+import Footer from "@/components/footer/footer";
 
 const theme = extendTheme({
   colors: {
@@ -26,11 +27,7 @@ function BusinessDetailsPage() {
   };
   return (
     <ChakraProvider theme={theme}>
-      <Flex
-        bgGradient="linear(to-b, spa.green, spa.grey)"
-        direction="column"
-        height="100vh"
-      >
+      <Flex bgGradient="linear(to-b, spa.green, spa.grey)" direction="column">
         <Navbar flexGrow={0} flexShrink={1} flexBasis="auto" />
         <Box maxW="lg" mx="auto" mt={8} p={4}>
           <Heading as="h1" mb={4}>
@@ -69,6 +66,7 @@ function BusinessDetailsPage() {
             better over the phone.
           </Text>
         </Box>
+        <Footer />
       </Flex>
     </ChakraProvider>
   );

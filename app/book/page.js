@@ -130,6 +130,7 @@ function FormPage() {
             justifyContent="space-between"
             onSubmit={handleSubmit}
             color="white"
+            paddingBottom={10}
           >
             <VStack spacing={4} w={["100%", "45%"]}>
               <FormControl isRequired>
@@ -206,8 +207,8 @@ function FormPage() {
                   borderRadius="md"
                 />
               </FormControl>
-              <Flex>
-                <FormControl isRequired>
+              <Flex justify="space-between">
+                <FormControl isRequired width="45%">
                   <FormLabel htmlFor="state">State</FormLabel>
                   <Input
                     type="text"
@@ -222,7 +223,7 @@ function FormPage() {
                     borderRadius="md"
                   />
                 </FormControl>
-                <FormControl isRequired>
+                <FormControl isRequired width="45%">
                   <FormLabel htmlFor="zipcode">Zip Code</FormLabel>
                   <Input
                     type="text"
@@ -259,11 +260,9 @@ function FormPage() {
                   <option value="thai">Thai Massage</option>
                 </Select>
               </FormControl>
-              <FormControl isRequired>
-                <FormLabel htmlFor="date">
-                  Date of Service (Please book at least 4 hours in advance)
-                </FormLabel>
-                <Flex direction="row" justify="space-between">
+              <Flex direction="row" justify="space-between">
+                <FormControl isRequired width="45%">
+                  <FormLabel htmlFor="date">Date</FormLabel>
                   <DatePicker
                     id="date"
                     selected={selectedDate}
@@ -281,13 +280,17 @@ function FormPage() {
                       />
                     }
                   />
+                </FormControl>
+                <FormControl isRequired width="45%">
+                  <FormLabel htmlFor="date">Time</FormLabel>
                   <DatePicker
                     id="time"
                     selected={selectedTime}
+                    width="45%"
                     onChange={handleTimeChange}
                     showTimeSelect
                     showTimeSelectOnly
-                    timeIntervals={15}
+                    timeIntervals={30}
                     timeCaption="Time"
                     dateFormat="h:mm aa"
                     required
@@ -298,11 +301,12 @@ function FormPage() {
                         _focus={{ bg: "white" }}
                         color="black"
                         borderRadius="md"
+                        alignSelf="flex-end"
                       />
                     }
                   />
-                </Flex>
-              </FormControl>
+                </FormControl>
+              </Flex>
               <FormControl isRequired>
                 <FormLabel htmlFor="photo">Photo ID</FormLabel>
                 <Input
@@ -347,7 +351,7 @@ function FormPage() {
             </VStack>
           </Flex>
         </Flex>
-        <Footer></Footer>
+        <Footer />
       </Flex>
     </ChakraProvider>
   );
